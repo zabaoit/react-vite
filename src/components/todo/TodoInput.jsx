@@ -1,18 +1,25 @@
-const TodoInput = props => {
-  const { addNewTodo } = props;
-  // addNewTodo("Baobao");
+import { useState } from "react";
 
+const TodoInput = props => {
+  // useState  hook (getter/setter)
+  // const valueInput = "Baobao"
+  const [valueInput, setValueInput] = useState("Baobao");
+
+  const { addNewTodo } = props;
+
+  // addNewTodo("Baobao");
   const handleClick = () => {
-    alert("call me");
+    console.log(">>> check valueInput: ", valueInput);
   };
 
-  const handlChange = event => {
-    console.log(">>> handlChange: ", event.target.value);
+  const handlChange = name => {
+    setValueInput(name);
   };
   return (
     <div className="todo-input">
-      <input type="text" placeholder="Enter your task" onChange={() => handlChange} />
+      <input type="text" placeholder="Enter your task" onChange={event => handlChange(event.target.value)} />
       <button onClick={handleClick}>Add</button>
+      <div>My text input is {valueInput}</div>
     </div>
   );
 };
