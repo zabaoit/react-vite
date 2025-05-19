@@ -1,4 +1,6 @@
-const TodoInput = () => {
+const TodoInput = props => {
+  const { addNewTodo } = props;
+  addNewTodo("Baobao");
   return (
     <div className="todo-input">
       <input type="text" placeholder="Enter your task" />
