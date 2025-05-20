@@ -10,6 +10,7 @@ const TodoInput = props => {
   // addNewTodo("Baobao");
   const handleClick = () => {
     addNewTodo(valueInput);
+    setValueInput("");
   };
 
   const handlChange = name => {
@@ -17,7 +18,12 @@ const TodoInput = props => {
   };
   return (
     <div className="todo-input">
-      <input type="text" placeholder="Enter your task" onChange={event => handlChange(event.target.value)} />
+      <input
+        type="text"
+        value={valueInput}
+        placeholder="Enter your task"
+        onChange={event => handlChange(event.target.value)}
+      />
       <button onClick={handleClick}>Add</button>
       <div>My text input is {valueInput}</div>
     </div>
