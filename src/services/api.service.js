@@ -14,4 +14,9 @@ const createUserAPI = (fullName, email, password, phone) => {
 
 const updateUserAPI = () => {};
 
-export { createUserAPI, updateUserAPI };
+const fecthAllUserAPI = () => {
+  const URL_BACKEND = "/api/v1/user";
+
+  return axios.get(URL_BACKEND);
+};
+export { createUserAPI, updateUserAPI, fecthAllUserAPI };

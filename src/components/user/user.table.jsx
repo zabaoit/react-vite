@@ -1,79 +1,37 @@
 import { Space, Table, Tag } from "antd";
+import { fecthAllUserAPI } from "../../services/api.service";
+import { useState } from "react";
 
 const UserTable = () => {
+  const [dataUser, setDataUsers] = useState([
+    { _id: "baobao", fullName: 25, email: "hcm" },
+    { _id: "ngb", fullName: 21, email: "hcm" },
+  ]);
+
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      render: text => <a>{text}</a>,
+      title: "Id",
+      dataIndex: "_id",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Full Name",
+      dataIndex: "fullName",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
-    {
-      title: "Tags",
-      key: "tags",
-      dataIndex: "tags",
-      render: (_, { tags }) => (
-        <>
-          {tags.map(tag => {
-            let color = tag.length > 5 ? "geekblue" : "green";
-            if (tag === "loser") {
-              color = "volcano";
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      ),
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
-      ),
-    },
-  ];
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sydney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
+      title: "Email",
+      dataIndex: "email",
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  const loadUser = async () => {
+    console.log(">>> run loadUser START");
+    const res = await fecthAllUserAPI();
+    console.log(">>> run loadUser END", res);
+    // setDataUsers(res.data);
+  };
+  loadUser();
+
+  return <Table columns={columns} dataSource={dataUser} />;
 };
 
 export default UserTable;
