@@ -1,12 +1,17 @@
-import { Space, Table, Tag } from "antd";
+import { Table } from "antd";
 import { fecthAllUserAPI } from "../../services/api.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserTable = () => {
   const [dataUser, setDataUsers] = useState([
     { _id: "baobao", fullName: 25, email: "hcm" },
     { _id: "ngb", fullName: 21, email: "hcm" },
   ]);
+
+  useEffect(() => {
+    console.log(">>> check useEffect");
+    loadUser();
+  }, []);
 
   const columns = [
     {
@@ -24,14 +29,13 @@ const UserTable = () => {
   ];
 
   const loadUser = async () => {
-    console.log(">>> run loadUser START");
     const res = await fecthAllUserAPI();
-    console.log(">>> run loadUser END", res);
-    // setDataUsers(res.data);
+    setDataUsers(res.data);
   };
-  loadUser();
 
-  return <Table columns={columns} dataSource={dataUser} />;
+  console.log(">>> run render ");
+
+  return <Table columns={columns} dataSource={dataUser} rowKey={"_id"} />;
 };
 
 export default UserTable;
