@@ -3,10 +3,7 @@ import { fecthAllUserAPI } from "../../services/api.service";
 import { useEffect, useState } from "react";
 
 const UserTable = () => {
-  const [dataUser, setDataUsers] = useState([
-    { _id: "baobao", fullName: 25, email: "hcm" },
-    { _id: "ngb", fullName: 21, email: "hcm" },
-  ]);
+  const [dataUser, setDataUsers] = useState([]);
 
   useEffect(() => {
     console.log(">>> check useEffect");
