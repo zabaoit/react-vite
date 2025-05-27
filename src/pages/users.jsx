@@ -12,7 +12,7 @@ const UsersPage = () => {
   useEffect(() => {
     loadUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [current, pageSize]);
 
   const loadUser = async () => {
     const res = await fecthAllUserAPI(current, pageSize);
@@ -24,6 +24,7 @@ const UsersPage = () => {
     }
   };
 
+  console.log(">>> check pageSize", pageSize);
   // lift-up
   return (
     <div>
