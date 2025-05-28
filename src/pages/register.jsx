@@ -1,4 +1,4 @@
-import { Button, Form, Input, notification } from "antd";
+import { Button, Col, Form, Input, notification, Row } from "antd";
 import { registerUserAPI } from "../services/api.service";
 import { useNavigate } from "react-router-dom";
 
@@ -30,49 +30,71 @@ const RegisterPage = () => {
       onFinish={onFinish}
       // onFinishFailed={onFinishFailed}
     >
-      <div
-        style={{
-          margin: "40px",
-        }}
-      >
-        <Form.Item
-          label="Full Name"
-          name="fullName"
-          rules={[{ required: true, message: "Please input your fullName!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your email!" }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          // eslint-disable-next-line no-undef
-          rules={[{ required: true, message: "Please input your password!" }]}
-          hasFeedback
-        >
-          <Input.Password />
-        </Form.Item>
-        <Form.Item
-          label="Phone number"
-          name="phone"
-          rules={[
-            {
-              // required: true,
-              pattern: new RegExp(/\d+/g),
-              message: "Wrong format!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+      <div style={{ margin: "10px" }}>
+        <Row justify={"center"}>
+          <Col xs={24} md={8}>
+            {" "}
+            <Form.Item
+              label="Full Name"
+              name="fullName"
+              rules={[{ required: true, message: "Please input your fullName!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col xs={24} md={8}>
+            {" "}
+            <Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your email!" }]}>
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col xs={24} md={8}>
+            {" "}
+            <Form.Item
+              label="Password"
+              name="password"
+              // eslint-disable-next-line no-undef
+              rules={[{ required: true, message: "Please input your password!" }]}
+              hasFeedback
+            >
+              <Input.Password />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col xs={24} md={8}>
+            {" "}
+            <Form.Item
+              label="Phone number"
+              name="phone"
+              rules={[
+                {
+                  // required: true,
+                  pattern: new RegExp(/\d+/g),
+                  message: "Wrong format!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
         {/* <button type="submit">Register</button> */}
-        <div>
-          <Button onClick={() => form.submit()} type="primary">
-            Register
-          </Button>
-        </div>
+
+        <Row justify={"center"}>
+          <Col xs={24} md={8}>
+            <div>
+              <Button onClick={() => form.submit()} type="primary">
+                Register
+              </Button>
+            </div>
+          </Col>
+        </Row>
       </div>
     </Form>
   );
