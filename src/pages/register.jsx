@@ -1,6 +1,6 @@
-import { Button, Col, Form, Input, notification, Row } from "antd";
+import { Button, Col, Divider, Form, Input, notification, Row } from "antd";
 import { registerUserAPI } from "../services/api.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [form] = Form.useForm();
@@ -37,7 +37,7 @@ const RegisterPage = () => {
             <Form.Item
               label="Full Name"
               name="fullName"
-              rules={[{ required: true, message: "Please input your fullName!" }]}
+              rules={[{ required: true, message: "Full Name không được để trống!" }]}
             >
               <Input />
             </Form.Item>
@@ -46,7 +46,14 @@ const RegisterPage = () => {
         <Row justify={"center"}>
           <Col xs={24} md={8}>
             {" "}
-            <Form.Item label="Email" name="email" rules={[{ required: true, message: "Please input your email!" }]}>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                { required: true, message: "Email không được để trống!" },
+                { type: "email", message: "Email không đúng định dạng" },
+              ]}
+            >
               <Input />
             </Form.Item>
           </Col>
@@ -58,7 +65,7 @@ const RegisterPage = () => {
               label="Password"
               name="password"
               // eslint-disable-next-line no-undef
-              rules={[{ required: true, message: "Please input your password!" }]}
+              rules={[{ required: true, message: "Password không được để trống!" }]}
               hasFeedback
             >
               <Input.Password />
@@ -74,8 +81,8 @@ const RegisterPage = () => {
               rules={[
                 {
                   // required: true,
-                  pattern: new RegExp(/\d+/g),
-                  message: "Wrong format!",
+                  pattern: new RegExp(/^\d+$/),
+                  message: "Không hợp lệ!",
                 },
               ]}
             >
@@ -92,6 +99,10 @@ const RegisterPage = () => {
               <Button onClick={() => form.submit()} type="primary">
                 Register
               </Button>
+            </div>
+            <Divider />
+            <div>
+              Đã có tài khoản? <Link to={"/login"}>Đăng nhập tại đây</Link>
             </div>
           </Col>
         </Row>
