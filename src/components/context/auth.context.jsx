@@ -18,5 +18,10 @@ export const AuthWrapper = props => {
     role: "",
     avatar: "",
   });
-  return <AuthContext.Provider value={{ user, setUser }}>{props.children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {props.children}
+      {/* <RouterProvider router={router} /> */}
+    </AuthContext.Provider>
+  );
 };
