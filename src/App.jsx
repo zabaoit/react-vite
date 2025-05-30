@@ -16,8 +16,8 @@ const App = () => {
   const fetchUserInfo = async () => {
     const res = await getAccountUser();
 
-    if (res.data && res.data.data) {
-      setUser(res.data.data.user);
+    if (res.data) {
+      setUser(res.data.user);
       console.log(">>> check data: ", res.data.data);
     }
   };
