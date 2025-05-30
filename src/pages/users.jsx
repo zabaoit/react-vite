@@ -16,15 +16,14 @@ const UsersPage = () => {
 
   const loadUser = async () => {
     const res = await fecthAllUserAPI(current, pageSize);
-    if (res.data && res.data.data.meta) {
-      setDataUsers(res.data.data.result);
-      setCurrent(res.data.data.meta.current);
-      setPageSize(res.data.data.meta.pageSize);
-      setTotal(res.data.data.meta.total);
+    if (res.data) {
+      setDataUsers(res.data.result);
+      setCurrent(res.data.meta.current);
+      setPageSize(res.data.meta.pageSize);
+      setTotal(res.data.meta.total);
     }
   };
 
-  console.log(">>> check pageSize", pageSize);
   // lift-up
   return (
     <div>

@@ -30,7 +30,7 @@ const UpdateUserModal = props => {
       await loadUser();
     } else {
       notification.error({
-        message: "Error create user",
+        message: "Error update user",
         description: JSON.stringify(res.message),
       });
       setIsModalUpdateOpen(false);

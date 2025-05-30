@@ -85,7 +85,7 @@ const loginUserAPI = (email, password) => {
 const getAccountUser = () => {
   const URL_BACKEND = "/api/v1/auth/account";
 
-  return axios.post(URL_BACKEND);
+  return axios.get(URL_BACKEND);
 };
 
 export {

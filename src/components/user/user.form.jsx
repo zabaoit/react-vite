@@ -14,8 +14,8 @@ const UserForm = props => {
 
   const handleSubmitBtn = async () => {
     const res = await createUserAPI(fullName, email, password, phone);
-
     if (res.data) {
+      // console.log(">>> check ", res);
       notification.success({
         message: "Create user",
         description: "Tạo mới người dùng thành công",

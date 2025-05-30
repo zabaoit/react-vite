@@ -15,10 +15,10 @@ const LoginPage = () => {
     setLoading(true);
     const res = await loginUserAPI(values.email, values.password);
 
-    if (res.data && res.data.data) {
+    if (res.data) {
       message.success("Đăng nhập thành công");
-      localStorage.setItem("access_token", res.data.data.access_token);
-      setUser(res.data.data.user);
+      localStorage.setItem("access_token", res.data.access_token);
+      setUser(res.data.user);
       navigate("/");
     } else {
       notification.error({
