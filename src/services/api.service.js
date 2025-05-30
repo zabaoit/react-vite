@@ -82,6 +82,12 @@ const loginUserAPI = (email, password) => {
   return axios.post(URL_BACKEND, data);
 };
 
+const getAccountUser = () => {
+  const URL_BACKEND = "/api/v1/auth/account";
+
+  return axios.post(URL_BACKEND);
+};
+
 export {
   createUserAPI,
   updateUserAPI,
@@ -91,4 +97,5 @@ export {
   updateUserAvatarAPI,
   registerUserAPI,
   loginUserAPI,
+  getAccountUser,
 };

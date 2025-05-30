@@ -15,10 +15,10 @@ const LoginPage = () => {
     setLoading(true);
     const res = await loginUserAPI(values.email, values.password);
 
-    if (res.data) {
+    if (res.data && res.data.data) {
       message.success("Đăng nhập thành công");
-      localStorage.setItem("access_token", res.data.access_token);
-      setUser(res.data.user);
+      localStorage.setItem("access_token", res.data.data.access_token);
+      setUser(res.data.data.user);
       navigate("/");
     } else {
       notification.error({
@@ -49,7 +49,11 @@ const LoginPage = () => {
                   { type: "email", message: "Email không đúng định dạng" },
                 ]}
               >
-                <Input />
+                <Input
+                  onKeyDown={event => {
+                    if (event.key === "Enter") form.submit();
+                  }}
+                />
               </Form.Item>
 
               <Form.Item
@@ -59,7 +63,11 @@ const LoginPage = () => {
                 rules={[{ required: true, message: "Password không được để trống!" }]}
                 hasFeedback
               >
-                <Input.Password />
+                <Input.Password
+                  onKeyDown={event => {
+                    if (event.key === "Enter") form.submit();
+                  }}
+                />
               </Form.Item>
 
               {/* <button type="submit">Register</button> */}
