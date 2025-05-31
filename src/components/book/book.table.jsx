@@ -2,6 +2,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Popconfirm, Table } from "antd";
 import { useEffect, useState } from "react";
 import { fecthAlLBookAPI } from "../../services/api.service";
+import BookDetail from "./book.detail";
 
 const BookTable = () => {
   const [dataBook, setDataBook] = useState([]);
@@ -9,11 +10,12 @@ const BookTable = () => {
   const [pageSize, setPageSize] = useState(5);
   const [total, setTotal] = useState(0);
 
+  const [dataDetail, setDataDetail] = useState(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [dataUpdate, setDataUpdate] = useState(null);
 
-  const [dataDetail, setDataDetail] = useState(null);
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
   useEffect(() => {
     loadBook();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -27,7 +29,6 @@ const BookTable = () => {
       setPageSize(res.data.meta.pageSize);
       setTotal(res.data.meta.total);
     }
-    console.log(" res: ", res.data);
   };
 
   const handleDeleteUser = () => {};
@@ -45,7 +46,14 @@ const BookTable = () => {
       render: (_, record) => {
         return (
           <>
-            <a onClick={() => {}}>{record._id}</a>
+            <a
+              onClick={() => {
+                setDataDetail(record);
+                setIsDetailOpen(true);
+              }}
+            >
+              {record._id}
+            </a>
           </>
         );
       },
@@ -146,6 +154,13 @@ const BookTable = () => {
           },
         }}
         onChange={onChange}
+      />
+
+      <BookDetail
+        dataDetail={dataDetail}
+        setDataDetail={setDataDetail}
+        isDetailOpen={isDetailOpen}
+        setIsDetailOpen={setIsDetailOpen}
       />
     </>
   );
