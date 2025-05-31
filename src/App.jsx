@@ -27,7 +27,6 @@ const App = () => {
     await delay(3000);
     if (res.data) {
       setUser(res.data.user);
-      console.log(">>> check data: ", res.data.data);
     }
     setIsAppLoading(false);
   };
