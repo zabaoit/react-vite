@@ -1,7 +1,7 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Popconfirm, Table } from "antd";
+import { Button, notification, Popconfirm, Table } from "antd";
 import { useEffect, useState } from "react";
-import { fecthAlLBookAPI } from "../../services/api.service";
+import { deleteBookAPI, fecthAlLBookAPI } from "../../services/api.service";
 import BookDetail from "./book.detail";
 import CreateBook from "./create.book.control";
 import CreateBookUnControl from "./create.book.uncontrol";
@@ -37,7 +37,21 @@ const BookTable = () => {
     }
   };
 
-  const handleDeleteUser = () => {};
+  const handleDeleteBook = async id => {
+    const res = await deleteBookAPI(id);
+    if (res.data) {
+      notification.success({
+        message: "Delete book",
+        description: "Xóa book thành công",
+      });
+      await loadBook();
+    } else {
+      notification.error({
+        message: "Delete book",
+        description: JSON.stringify(res.message),
+      });
+    }
+  };
 
   const columns = [
     {
@@ -99,9 +113,9 @@ const BookTable = () => {
           />
 
           <Popconfirm
-            title="Xóa người dùng"
-            description="Bạn chắc chắn xóa user này ?"
-            onConfirm={() => handleDeleteUser(record._id)}
+            title="Delete book"
+            description="Bạn chắc chắn xóa book này ?"
+            onConfirm={() => handleDeleteBook(record._id)}
             okText="Yes"
             cancelText="No"
             placement="left"
