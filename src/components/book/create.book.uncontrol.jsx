@@ -10,6 +10,8 @@ const CreateBookUnControl = props => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmitBtn = async values => {
     const { mainText, author, price, quantity, category } = values;
 
@@ -26,6 +28,7 @@ const CreateBookUnControl = props => {
     if (resUpload.data) {
       const newThumbnail = resUpload.data.fileUploaded;
       // step 2: upload book
+      setLoading(true);
       const resBook = await createBookAPI(newThumbnail, mainText, author, price, quantity, category);
       if (resBook.data) {
         resetAndClearModal();
@@ -40,12 +43,14 @@ const CreateBookUnControl = props => {
           description: JSON.stringify(resBook.message),
         });
       }
+      setLoading(false);
     } else {
       notification.error({
         message: "Error upload file",
         description: JSON.stringify(resUpload.message),
       });
     }
+    setLoading(false);
   };
 
   const resetAndClearModal = () => {
@@ -72,6 +77,9 @@ const CreateBookUnControl = props => {
   return (
     <>
       <Modal
+        okButtonProps={{
+          loading: loading,
+        }}
         title="Create book uncontrol"
         open={isCreateOpen}
         onOk={() => form.submit()}

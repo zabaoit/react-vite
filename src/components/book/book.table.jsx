@@ -22,12 +22,15 @@ const BookTable = () => {
 
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     loadBook();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, pageSize]);
 
   const loadBook = async () => {
+    setLoading(true);
     const res = await fecthAlLBookAPI(current, pageSize);
     if (res.data) {
       setDataBook(res.data.result);
@@ -35,6 +38,7 @@ const BookTable = () => {
       setPageSize(res.data.meta.pageSize);
       setTotal(res.data.meta.total);
     }
+    setLoading(false);
   };
 
   const handleDeleteBook = async id => {
@@ -159,6 +163,7 @@ const BookTable = () => {
       </div>
 
       <Table
+        loading={loading}
         dataSource={dataBook}
         columns={columns}
         pagination={{

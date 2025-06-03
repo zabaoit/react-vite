@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, message } from "antd";
 import {
   HomeOutlined,
@@ -7,11 +7,14 @@ import {
   LoginOutlined,
   AliwangwangOutlined,
 } from "@ant-design/icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { logoutAPI } from "../../services/api.service";
+
 const Header = () => {
   const { user, setUser } = useContext(AuthContext);
+  const location = useLocation();
+
   const items = [
     {
       label: <Link to={"/"}>Home</Link>,
@@ -56,9 +59,23 @@ const Header = () => {
   ];
 
   const [current, setCurrent] = useState("mail");
+
+  useEffect(() => {
+    if (location && location.pathname) {
+      const allRoutes = ["users", "books"];
+      const currentRoute = allRoutes.find(item => `/${item}` === location.pathname);
+      if (currentRoute) {
+        setCurrent(currentRoute);
+      } else {
+        setCurrent("home");
+      }
+    }
+  }, [location]);
+
   const onClick = e => {
     setCurrent(e.key);
   };
+
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
