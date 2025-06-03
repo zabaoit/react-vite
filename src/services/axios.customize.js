@@ -1,4 +1,10 @@
 import axios from "axios";
+import NProgress from "nprogress";
+
+NProgress.configure({
+  showSpinner: false,
+  trickleSpeed: 100,
+});
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -8,6 +14,7 @@ const instance = axios.create({
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
+    NProgress.start();
     if (typeof window !== "undefined" && window && window.localStorage && window.localStorage.getItem("access_token")) {
       config.headers.Authorization = "Bearer " + window.localStorage.getItem("access_token");
     }
@@ -15,6 +22,7 @@ instance.interceptors.request.use(
     return config;
   },
   function (error) {
+    NProgress.done();
     // Do something with request error
     return Promise.reject(error);
   }
@@ -23,12 +31,14 @@ instance.interceptors.request.use(
 // Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
+    NProgress.done();
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     if (response.data && response.data.data) return response.data;
     return response;
   },
   function (error) {
+    NProgress.done();
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
 

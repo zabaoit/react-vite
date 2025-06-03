@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import { getAccountUser } from "./services/api.service";
 import { AuthContext } from "./components/context/auth.context";
 import { Spin } from "antd";
+import "nprogress/nprogress.css";
 
 const App = () => {
   const { setUser, isAppLoading, setIsAppLoading } = useContext(AuthContext);
