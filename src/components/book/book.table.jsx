@@ -34,8 +34,8 @@ const BookTable = () => {
     const res = await fecthAlLBookAPI(current, pageSize);
     if (res.data) {
       setDataBook(res.data.result);
-      setCurrent(res.data.meta.current);
-      setPageSize(res.data.meta.pageSize);
+      // setCurrent(res.data.meta.current);
+      // setPageSize(res.data.meta.pageSize);
       setTotal(res.data.meta.total);
     }
     setLoading(false);
